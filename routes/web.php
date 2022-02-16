@@ -1,18 +1,18 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
+/**
+*
+* @version 1.0
+*
+* @author Milan Gotera <milangotera@gmail.com>
+* @copyright milangotera@gmail.com
+*
 */
 
+/** @var \Laravel\Lumen\Routing\Router $router */
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Api v1';
 });
+
+$router->get('/employees', 'EmployeeController@list');

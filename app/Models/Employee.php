@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $table = 'employees';
+    protected $table = 'lumen_employees.employees';
 
     /**
      * The attributes that are mass assignable.
