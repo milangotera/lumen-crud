@@ -68,12 +68,29 @@ class EmployeeController extends Controller
         $employee->save();
 
         return response()->json([
-            'id'       => $employee->id,
-            'name'     => $employee->name,
-            'age'      => $employee->age,
-            'position' => $employee->position,
-            'date'     => $employee->date,
+            'employee' => [
+                'id'       => $employee->id,
+                'name'     => $employee->name,
+                'age'      => $employee->age,
+                'position' => $employee->position,
+                'date'     => $employee->date,
+            ]
         ], 201);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+
+        return response()->json([
+            'employee' => [
+                'id'       => $employee->id,
+                'name'     => $employee->name,
+                'age'      => $employee->age,
+                'position' => $employee->position,
+                'date'     => $employee->date,
+            ]
+        ], 200);
     }
 
     public function delete(Request $request, $id)

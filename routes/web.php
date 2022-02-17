@@ -17,4 +17,5 @@ $router->get('/', function () use ($router) {
 
 $router->get('/employees', 'EmployeeController@list');
 $router->post('/employees', 'EmployeeController@new');
+$router->get('/employees/{id}', 'EmployeeController@show');
 $router->delete('/employees/{id}', 'EmployeeController@delete');
