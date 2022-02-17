@@ -16,3 +16,4 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/employees', 'EmployeeController@list');
+$router->delete('/employees/{id}', 'EmployeeController@delete');

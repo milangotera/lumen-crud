@@ -30,4 +30,14 @@ class EmployeeController extends Controller
             'employees' => $employees,
         ],200);
     }
+
+    public function delete(Request $request, $id)
+    {
+        $employees = Employee::find($id);
+        $employees->delete();
+
+        return response()->json([
+            'messages' => 'Se ha eliminado el emppleado correctamente',
+        ],200);
+    }
 }
