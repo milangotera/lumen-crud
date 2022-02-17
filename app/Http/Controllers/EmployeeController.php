@@ -78,9 +78,73 @@ class EmployeeController extends Controller
         ], 201);
     }
 
+    public function update(Request $request)
+    {
+
+        $error = [];
+
+        if(!$request->id){
+            $error['id'] = "El campo id es obligatorio";
+        }
+
+        if(!$request->name){
+            $error['name'] = "El campo nombre es obligatorio";
+        }
+
+        if(!$request->age){
+            $error['age'] = "El campo edad es obligatorio";
+        }
+
+        if(!$request->position){
+            $error['position'] = "El campo cargo es obligatorio";
+        }
+
+        if(!$request->date){
+            $error['date'] = "El campo fecha es obligatorio";
+        }
+
+        if(count($error) > 0){
+            return response()->json([
+                'message'    => 'Parece que faltaron algunos datos',
+                'errors'     => $error,
+                'data'     => $request->all()
+            ], 403);
+        }
+
+        $employee = Employee::find($request->id);
+
+        if(!$employee) {
+            return response()->json([
+                'messages' => 'No existe el empleado que buscas',
+            ],400);
+        }
+
+        $employee->name     = $request->name;
+        $employee->age      = $request->age;
+        $employee->position = $request->position;
+        $employee->date     = $request->date;
+        $employee->save();
+
+        return response()->json([
+            'employee' => [
+                'id'       => $employee->id,
+                'name'     => $employee->name,
+                'age'      => $employee->age,
+                'position' => $employee->position,
+                'date'     => $employee->date,
+            ]
+        ], 200);
+    }
+
     public function show(Request $request, $id)
     {
         $employee = Employee::find($id);
+
+        if(!$employee) {
+            return response()->json([
+                'messages' => 'No existe el empleado que buscas',
+            ],400);
+        }
 
         return response()->json([
             'employee' => [
